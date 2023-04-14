@@ -39,6 +39,7 @@ class ModQlcurlHelper
             }
             return match ($this->params->get('connection_type')) {
                 'curl' => $this->getDataByCUrl($url),
+                // default, simple
                 default => $this->getDataSimple($url),
             };
         } catch (Exception $e) {

@@ -42,10 +42,11 @@
     <config>
         <fields name="params">
             <fieldset name="basic">
-                <field name="connection_type" type="list" default="default" label="MOD_QLCURL_CONNECTIONTYPE_LABEL"
+                <field name="connection_type" type="list" default="curl" label="MOD_QLCURL_CONNECTIONTYPE_LABEL"
                        description="MOD_QLCURL_CONNECTIONTYPE_DESC">
-                    <option value="default">JDEFAULT</option>
                     <option value="curl">MOD_QLCURL_CURL</option>
+                    <option value="simple">MOD_QLCURL_SIMPLE</option>
+                    <option value="default">JDEFAULT</option>
                 </field>
                 <field name="url" filter="raw" label="MOD_QLCURL_URL_LABEL" description="MOD_QLCURL_URL_DESC"/>
                 <field name="url_display" type="radio" class="btn-group" default="1" label="MOD_QLCURL_DISPLAYURL_LABEL"
