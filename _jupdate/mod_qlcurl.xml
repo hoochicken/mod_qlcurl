@@ -1,0 +1,21 @@
+ <updates>
+	 <update>
+		<name>qlcurl</name>
+		<client>site</client>
+		<type>module</type>
+		<element>qlcurl</element>
+		<version>1.0.1</version>
+		<description>qlcurldisplay grabs and displays external data</description>
+		<infourl title="ql.de - Blackforest Software">https://ql.de</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">https://github.com/hoochicken/mod_qlcurl/archive/refs/tags/v1.0.1.zip</downloadurl>
+		</downloads>
+		<tags>
+			<tag>stable</tag>
+		</tags>
+		<maintainer>Dr. Mareike Riegel</maintainer>
+		<maintainerurl>http://ql.de</maintainerurl>
+		<section>Updates</section>
+		<targetplatform name="joomla" version="[34]"/>
+	 </update>
+ </updates>

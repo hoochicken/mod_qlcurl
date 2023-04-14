@@ -1,99 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension
-	type="module"
-	version="3.0"
-	client="site"
-	method="upgrade">
-  <name>qlcurl</name>
-  <author>Mareike Riegel</author>
-  <creationDate>2023-09-01</creationDate>
-  <copyright>ql.de</copyright>
-  <license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
-  <authorEmail>info@ql.de</authorEmail>
-  <authorUrl>www.ql.de</authorUrl>
-  <version>1.0</version>
-  <description>MOD_QLCURL_XMLDESCRIPTION</description>
-	<files>
-		<filename module="mod_qlcurl">mod_qlcurl.php</filename>
-		<folder>tmpl</folder>
-		<folder>language</folder>
-		<folder>php</folder>
-		<filename>index.html</filename>
-    	<filename>helper.php</filename>
-    	<filename>mod_qlcurl.xml</filename>
-	</files>
-	<languages>
-		<language tag="en-GB">language/en-GB/en-GB.mod_qlcurl.ini</language>
-		<language tag="en-GB">language/en-GB/en-GB.mod_qlcurl.sys.ini</language>
-	</languages>
-	<config>
-		<fields name="params">
-			<fieldset name="basic">
-				<field name="connectionType" type="list" default="default" label="MOD_QLCURL_CONNECTIONTYPE_LABEL" description="MOD_QLCURL_CONNECTIONTYPE_DESC">
-                    <option value="0">JNONE</option>
+        type="module"
+        version="1.0.1"
+        client="site"
+        method="upgrade">
+    <name>qlcurl</name>
+    <author>Mareike Riegel</author>
+    <creationDate>2023-04-14</creationDate>
+    <copyright>ql.de</copyright>
+    <license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
+    <authorEmail>info@ql.de</authorEmail>
+    <authorUrl>www.ql.de</authorUrl>
+    <version>1.0.1</version>
+    <description>MOD_QLCURL_XMLDESCRIPTION</description>
+    <updateservers>
+        <server type="extension" priority="1" name="qlcurl - Updates">
+            https://raw.githubusercontent.com/hoochicken/mod_qlcurl/main/_jupdate/mod_qlcurl.xml
+        </server>
+    </updateservers>
+    <media folder="media" destination="mod_qlform">
+        <folder>css</folder>
+        <folder>js</folder>
+    </media>
+    <files>
+        <filename module="mod_qlcurl">mod_qlcurl.php</filename>
+        <folder>_jupdate</folder>
+        <folder>css</folder>
+        <folder>js</folder>
+        <folder>language</folder>
+        <folder>php</folder>
+        <folder>tmpl</folder>
+        <filename>index.html</filename>
+        <filename>helper.php</filename>
+        <filename>mod_qlcurl.xml</filename>
+        <filename>licence.txt</filename>
+    </files>
+    <languages>
+        <language tag="en-GB">language/en-GB/en-GB.mod_qlcurl.ini</language>
+        <language tag="en-GB">language/en-GB/en-GB.mod_qlcurl.sys.ini</language>
+    </languages>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field name="connection_type" type="list" default="default" label="MOD_QLCURL_CONNECTIONTYPE_LABEL"
+                       description="MOD_QLCURL_CONNECTIONTYPE_DESC">
                     <option value="default">JDEFAULT</option>
                     <option value="curl">MOD_QLCURL_CURL</option>
-                    <option value="3rd_way">MOD_QLCURL_CUSTOM</option>
-                    <option value="4th_way">MOD_QLCURL_CUSTOM2</option>
                 </field>
-                <field name="url" filter="raw" type="textarea" rows="6" label="MOD_QLCURL_URL_LABEL" description="MOD_QLCURL_URL_DESC" />
-                <field name="urlDisplay" filter="raw" type="textarea" rows="6" label="MOD_QLCURL_STORAGE_LABEL" description="MOD_QLCURL_STORAGE_DESC" />
-                <field name="useragent" type="text" default="qlbot" label="MOD_QLCURL_USERAGENT_LABEL" description="MOD_QLCURL_USERAGENT_DESC" />
-                <field name="login"  type="radio" class="btn-group" default="0" label="MOD_QLCURL_LOGIN_LABEL" description="MOD_QLCURL_LOGIN_DESC">
+                <field name="url" filter="raw" label="MOD_QLCURL_URL_LABEL" description="MOD_QLCURL_URL_DESC"/>
+                <field name="url_display" type="radio" class="btn-group" default="1" label="MOD_QLCURL_DISPLAYURL_LABEL"
+                       description="MOD_QLCURL_DISPLAYURL_DESC">
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
                 </field>
-                <field name="user" type="text" label="MOD_QLCURL_USER_LABEL" description="MOD_QLCURL_USER_DESC" />
-                <field name="password" type="text" label="MOD_QLCURL_PASSWORD_LABEL" description="MOD_QLCURL_PASSWORD_DESC" />
+                <field name="useragent" type="text" default="qlbot" label="MOD_QLCURL_USERAGENT_LABEL"
+                       description="MOD_QLCURL_USERAGENT_DESC"/>
+                <field name="login" type="radio" class="btn-group" default="0" label="MOD_QLCURL_LOGIN_LABEL"
+                       description="MOD_QLCURL_LOGIN_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="user" type="text" label="MOD_QLCURL_USER_LABEL" description="MOD_QLCURL_USER_DESC"/>
+                <field name="password" type="text" label="MOD_QLCURL_PASSWORD_LABEL"
+                       description="MOD_QLCURL_PASSWORD_DESC"/>
+            </fieldset>
+            <fieldset name="display">
+                <field name="display_textarea" type="radio" class="btn-group" default="0"
+                       label="MOD_QLCURL_DISPLAYTEXTAREA_LABEL" description="MOD_QLCURL_DISPLAYTEXTAREA_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="xml_transform" type="radio" class="btn-group" default="0"
+                       label="MOD_QLCURL_XMLTRANSFORM_LABEL" description="MOD_QLCURL_XMLTRANSFORM_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
             </fieldset>
             <fieldset
-                    name="rarely">
-                <field name="codeParams" filter="raw" type="textarea" default="" label="MOD_QLCURL_PARAMS_LABEL" cols="60" rows="5" description="MOD_QLCURL_PARAMS_DESC" />
-                <field name="codeReplaceQuotes" type="radio" class="btn-group" default="1" label="MOD_QLCURL_REPLACE_LABEL" description="MOD_QLCURL_REPLACE_DESC">
-                    <option value="1">JYES</option>
-                    <option value="0">JNO</option>
+                    name="advanced">
+                <field
+                        name="layout"
+                        type="modulelayout"
+                        label="JFIELD_ALT_LAYOUT_LABEL"
+                        description="JFIELD_ALT_MODULE_LAYOUT_DESC"/>
+
+                <field
+                        name="moduleclass_sfx"
+                        type="text"
+                        label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+                        description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC"/>
+
+                <field
+                        name="cache"
+                        type="list"
+                        default="1"
+                        label="COM_MODULES_FIELD_CACHING_LABEL"
+                        description="COM_MODULES_FIELD_CACHING_DESC">
+                    <option
+                            value="1">JGLOBAL_USE_GLOBAL
+                    </option>
+                    <option
+                            value="0">COM_MODULES_FIELD_VALUE_NOCACHING
+                    </option>
+                </field>
+
+                <field
+                        name="cache_time"
+                        type="text"
+                        default="900"
+                        label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+                        description="COM_MODULES_FIELD_CACHE_TIME_DESC"/>
+                <field
+                        name="cachemode"
+                        type="hidden"
+                        default="static">
+                    <option value="static"></option>
                 </field>
             </fieldset>
-			<fieldset
-				name="advanced">
-				<field
-					name="layout"
-					type="modulelayout"
-					label="JFIELD_ALT_LAYOUT_LABEL"
-					description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
-
-				<field
-					name="moduleclass_sfx"
-					type="text"
-					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
-					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
-
-				<field
-					name="cache"
-					type="list"
-					default="1"
-					label="COM_MODULES_FIELD_CACHING_LABEL"
-					description="COM_MODULES_FIELD_CACHING_DESC">
-					<option
-						value="1">JGLOBAL_USE_GLOBAL</option>
-					<option
-						value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
-				</field>
-
-				<field
-					name="cache_time"
-					type="text"
-					default="900"
-					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
-					description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
-				<field
-					name="cachemode"
-					type="hidden"
-					default="static">
-					<option
-						value="static"></option>
-				</field>
-			</fieldset>
-		</fields>
-	</config>
+        </fields>
+    </config>
 </extension>

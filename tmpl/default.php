@@ -7,9 +7,28 @@
  */
 
 // no direct access
+use Joomla\Registry\Registry;
+
 defined('_JEXEC') or die('Restricted access');
 
-if (1 == $params->get('urlStorage', 0)) echo '<div class="url">' . $params->get('url') . '</div>';
+/** @var Registry $params */
+/** @var stdClass $module */
+/** @var string $qlcurlData */
+/** @var ?SimpleXMLElement $xml */
+/** @var stdClass $json */
+?>
 
-if (1 == $php) include_once($strFilenameTemp);
-else echo $code;
+<div class="qlcurl">
+    <?php if ($params->get('url_display', 0)) : ?>
+    <div class="url">
+        <?php $params->get('url', ''); ?>
+    </div>
+<?php endif; ?>
+
+<?php if ($params->get('display_textarea', 0)) : ?>
+    <textarea class="xml">
+<?php endif; ?>
+<?php echo $qlcurlData; ?>
+<?php if ($params->get('display_textarea', 0)) : ?>
+    </textarea>
+<?php endif; ?>
