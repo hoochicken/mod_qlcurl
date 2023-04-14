@@ -19,9 +19,9 @@ defined('_JEXEC') or die('Restricted access');
 ?>
 
 <div class="qlcurl">
-    <?php if ($params->get('url_display', 0)) : ?>
+    <?php if ((bool)$params->get('url_display', 0)) : ?>
     <div class="url">
-        <?php $params->get('url', ''); ?>
+        <?php echo $params->get('url', ''); ?>
     </div>
 <?php endif; ?>
 
