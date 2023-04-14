@@ -6,7 +6,7 @@
 	method="upgrade">
   <name>qlcurl</name>
   <author>Mareike Riegel</author>
-  <creationDate>2016-09-01</creationDate>
+  <creationDate>2023-09-01</creationDate>
   <copyright>ql.de</copyright>
   <license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
   <authorEmail>info@ql.de</authorEmail>
@@ -29,36 +29,7 @@
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
-				<field name="code" filter="raw" type="textarea" default="" label="MOD_QLCURL_CODE_LABEL" cols="60" rows="20" description="MOD_QLCURL_CODE_DESC" />
-				<field name="xmlTransform" type="radio" class="btn-group" default="1" label="MOD_QLCURL_XMLTRANSFORM_LABEL" description="MOD_QLCURL_XMLTRANSFORM_DESC">
-                    <option value="1">JYES</option>
-                    <option value="0">JNO</option>
-				</field>
-                <field name="php" type="radio" class="btn-group" default="1" label="MOD_QLCURL_PHP_LABEL" description="MOD_QLCURL_PHP_DESC">
-                    <option value="1">JYES</option>
-                    <option value="0">JNO</option>
-				</field>
-                <field name="clean" type="list" default="0" label="MOD_QLCURL_CLEAN_LABEL" description="MOD_QLCURL_CLEAN_DESC">
-                    <option value="0">JNO</option>
-                    <option value="1">MOD_QLCURL_JS</option>
-                    <option value="2">MOD_QLCURL_CSS</option>
-                    <option value="3">JALL</option>
-                </field>
-                <field name="debugSpacer" type="spacer" label="MOD_QLCURL_DEBUGSPACER"/>
-                <field name="urlStorage" type="radio" class="btn-group" label="MOD_QLCURL_URL_LABEL" description="MOD_QLCURL_URL_DESC" default="0">
-                    <option value="1">JSHOW</option>
-                    <option value="0">JHIDE</option>
-                </field>
-                <field name="printData" type="radio" class="btn-group" default="0" label="MOD_QLCURL_PRINTDATA_LABEL" description="MOD_QLCURL_PRINTDATA_DESC">
-                    <option value="1">JYES</option>
-                    <option value="2">MOD_QLCURL_XML</option>
-                    <option value="0">JNO</option>
-                </field>
-
-            </fieldset>
-			<fieldset
-				name="connection">
-                <field name="connectionType" type="list" default="default" label="MOD_QLCURL_CONNECTIONTYPE_LABEL" description="MOD_QLCURL_CONNECTIONTYPE_DESC">
+				<field name="connectionType" type="list" default="default" label="MOD_QLCURL_CONNECTIONTYPE_LABEL" description="MOD_QLCURL_CONNECTIONTYPE_DESC">
                     <option value="0">JNONE</option>
                     <option value="default">JDEFAULT</option>
                     <option value="curl">MOD_QLCURL_CURL</option>
