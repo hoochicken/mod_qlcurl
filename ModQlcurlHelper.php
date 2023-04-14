@@ -37,8 +37,14 @@ class ModQlcurlHelper
             if (empty(trim($url))) {
                 return '';
             }
+
+            $userAgent = $this->params->get('user_agent');
+            $login = (bool)$this->params->get('login');
+            $user = $this->params->get('user');
+            $passwort =  $this->params->get('password');
+
             return match ($this->params->get('connection_type')) {
-                'curl' => $this->getDataByCUrl($url),
+                'curl' => $this->getDataByCUrl($url, $userAgent, $login, $user, $passwort),
                 // default, simple
                 default => $this->getDataSimple($url),
             };
@@ -96,20 +102,22 @@ class ModQlcurlHelper
     /*
     * getExternalData via Curl
     */
-    public function getDataByCUrl($url): string
+    public function getDataByCUrl(string $url, ?string $userAgent, bool $login, ?string $user, ?string $passwort): string
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        if ((bool)$this->params->get('login')) {
+        curl_setopt($ch, CURLOPT_USERAGENT, $userAgent);
+        curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+
+        if ($login) {
             curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-            curl_setopt($ch, CURLOPT_USERPWD, $this->params->get('user') . ':' . $this->params->get('password'));
+            curl_setopt($ch, CURLOPT_USERPWD, sprintf('%s:%s', $user, $passwort));
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
             // curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         }
-        curl_setopt($ch, CURLOPT_USERAGENT, $this->params->get('user_agent'));
-        curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+
         $output = curl_exec($ch);
         curl_close($ch);
         if (false === $output) {
