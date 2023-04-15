@@ -30,7 +30,7 @@ $userAgent = $params->get('user_agent', '');
 $login = (bool)$params->get('login', false);
 $password = $params->get('password', '');
 
-echo $QlcurlHelper->execAbsoluteDummieCode($url, $username, $password);
+// echo $QlcurlHelper->execAbsoluteDummieCode($url, $username, $password);
 
 $qlcurlData = $QlcurlHelper->getDataByUrl($url, $userAgent, $login, $username, $password);
 $xml = $params->get('xml_transform', false) ? $QlcurlHelper->xmlTransform($qlcurlData) : '';
@@ -38,7 +38,6 @@ $json = $QlcurlHelper->isJson($qlcurlData) ? $QlcurlHelper->asJson($qlcurlData) 
 
 $errors = $QlcurlHelper->getErrors();
 if (0 < count($errors)) {
-    Factory::getApplication()->enqueueMessage(Text::_('MOD_QLCURL_MSG_XML_IS_NOTVALID'));
     foreach ($errors as $error) {
         Factory::getApplication()->enqueueMessage($error);
     }
