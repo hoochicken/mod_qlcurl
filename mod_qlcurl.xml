@@ -18,7 +18,7 @@
             https://raw.githubusercontent.com/hoochicken/mod_qlcurl/main/_jupdate/mod_qlcurl.xml
         </server>
     </updateservers>
-    <media folder="media" destination="mod_qlform">
+    <media folder="media" destination="mod_qlcurl">
         <folder>css</folder>
         <folder>js</folder>
     </media>
