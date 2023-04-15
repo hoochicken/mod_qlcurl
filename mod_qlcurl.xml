@@ -50,14 +50,9 @@
                     <option value="default">JDEFAULT</option>
                 </field>
                 <field name="url" filter="raw" label="MOD_QLCURL_URL_LABEL" description="MOD_QLCURL_URL_DESC"/>
-                <field name="url_display" type="radio" class="btn-group" default="1" label="MOD_QLCURL_DISPLAYURL_LABEL"
-                       description="MOD_QLCURL_DISPLAYURL_DESC">
-                    <option value="1">JYES</option>
-                    <option value="0">JNO</option>
-                </field>
                 <field name="useragent" type="text" default="qlcurl_bot" label="MOD_QLCURL_USERAGENT_LABEL"
                        description="MOD_QLCURL_USERAGENT_DESC"/>
-                <field name="login" type="radio" class="btn-group" default="0" label="MOD_QLCURL_LOGIN_LABEL"
+                <field name="login" type="radio" class="btn-group btn-group-yesno" default="0" label="MOD_QLCURL_LOGIN_LABEL"
                        description="MOD_QLCURL_LOGIN_DESC">
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
@@ -67,12 +62,17 @@
                        description="MOD_QLCURL_PASSWORD_DESC"/>
             </fieldset>
             <fieldset name="display">
-                <field name="display_textarea" type="radio" class="btn-group" default="0"
+                <field name="url_display" type="radio" class="btn-group btn-group-yesno" default="1" label="MOD_QLCURL_DISPLAYURL_LABEL"
+                       description="MOD_QLCURL_DISPLAYURL_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="display_textarea" type="radio" class="btn-group btn-group-yesno" default="0"
                        label="MOD_QLCURL_DISPLAYTEXTAREA_LABEL" description="MOD_QLCURL_DISPLAYTEXTAREA_DESC">
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
                 </field>
-                <field name="xml_transform" type="radio" class="btn-group" default="0"
+                <field name="xml_transform" type="radio" class="btn-group btn-group-yesno" default="0"
                        label="MOD_QLCURL_XMLTRANSFORM_LABEL" description="MOD_QLCURL_XMLTRANSFORM_DESC">
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>

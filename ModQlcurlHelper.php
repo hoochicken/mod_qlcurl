@@ -14,6 +14,7 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\Registry\Registry;
 use SimpleXMLElement;
+use XMLReader;
 
 defined('_JEXEC') or die('Restricted access');
 
@@ -21,7 +22,7 @@ class ModQlcurlHelper
 {
     private \stdClass $module;
     private Registry $params;
-    private array $error;
+    private array $errors = [];
     const MODULE = 'mod_qlcurl';
     const JOOMLA4 = 4;
 
@@ -57,17 +58,35 @@ class ModQlcurlHelper
 
     private function addError(string $msg)
     {
-        $this->error[] = $msg;
+        $this->errors[] = $msg;
     }
 
-    private function getErrors(): array
+    public function getErrors(): array
     {
-        return $this->error;
+        return $this->errors;
     }
 
-    public function xmlTransform(string $xml): SimpleXMLElement|false
+    public function xmlTransform(string $xml): SimpleXMLElement|null
     {
+        if (!$this->checkXmlIsValid($xml)) {
+            return null;
+        }
         return simplexml_load_string($xml);
+    }
+
+    public function checkXmlIsValid(string $xml): bool
+    {
+        libxml_use_internal_errors(true);
+        $valid = @simplexml_load_string($xml);
+        if (is_object($valid)) {
+            return true;
+        }
+
+        $errors = libxml_get_errors();
+        foreach ($errors as $error) {
+            // $this->addError($error->message);
+        }
+        return false;
     }
 
     public function asJson(string $xml): ?\stdClass
