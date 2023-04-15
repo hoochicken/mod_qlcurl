@@ -32,22 +32,17 @@ class ModQlcurlHelper
         $this->params = $params;
     }
 
-    function getDataByUrl(string $url): string
+    function getDataByUrl(string $url, ?string $userAgent, bool $login, ?string $username, ?string $password): string
     {
         try {
             if (empty(trim($url))) {
                 return '';
             }
 
-            $userAgent = $this->params->get('user_agent');
-            $login = (bool)$this->params->get('login');
-            $user = $this->params->get('user');
-            $passwort =  $this->params->get('password');
-
             return match ($this->params->get('connection_type')) {
-                'curl' => $this->getDataByCUrl($url, $userAgent, $login, $user, $passwort),
+                'curl' => $this->getDataByCUrl($url, $userAgent, $login, $username, $password),
                 // default, simple
-                default => $this->getDataSimple($url),
+                default => $this->getDataSimple($url, $userAgent, $login, $username, $password),
             };
         } catch (Exception $e) {
             $msg = sprintf('%s problems with url `%s`', self::MODULE, $url);
@@ -100,15 +95,15 @@ class ModQlcurlHelper
         return json_last_error() === JSON_ERROR_NONE;
     }
 
-    public function getDataSimple($url): string
+    public function getDataSimple(string $url, ?string $userAgent, bool $login, ?string $user, ?string $password): string
     {
-        if (!empty($this->params->get('user_agent'))) {
-            ini_set('user_agent', $this->params->get('user_agent'));
+        if (!empty($userAgent)) {
+            ini_set('user_agent', $userAgent);
         }
 
-        $context = (bool)$this->params->get('login')
+        $context = $login
             ? stream_context_create(
-                ['http' => ['header' => sprintf('Authorization: Basic %:%s', base64_encode($this->params->get('user')), $this->params->get('password'))]])
+                ['http' => ['header' => sprintf('Authorization: Basic %s', base64_encode($user . ':' . $password))]])
             : null;
 
         $output = @file_get_contents($url, false, $context);
@@ -121,7 +116,7 @@ class ModQlcurlHelper
     /*
     * getExternalData via Curl
     */
-    public function getDataByCUrl(string $url, ?string $userAgent, bool $login, ?string $user, ?string $passwort): string
+    public function getDataByCUrl(string $url, ?string $userAgent, bool $login, ?string $user, ?string $password): string
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -132,11 +127,13 @@ class ModQlcurlHelper
 
         if ($login) {
             curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-            curl_setopt($ch, CURLOPT_USERPWD, sprintf('%s:%s', $user, $passwort));
+            // curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
+            curl_setopt($ch, CURLOPT_USERPWD, sprintf('%s:%s', $user, $password));
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
             // curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         }
 
+        $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $output = curl_exec($ch);
         curl_close($ch);
         if (false === $output) {
@@ -145,9 +142,6 @@ class ModQlcurlHelper
         return $output;
     }
 
-    /**
-     *
-     */
     public function addScripts()
     {
         if ($this->isJoomla4(JVERSION)) {
@@ -161,11 +155,22 @@ class ModQlcurlHelper
         }
     }
 
-    /**
-     *
-     */
     public function isJoomla4($jversion)
     {
         return (int)$jversion >= self::JOOMLA4;
+    }
+
+    public function execAbsoluteDummieCode(string $url, string $username, string $password): string
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30); //timeout after 30 seconds
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
+        curl_setopt($ch, CURLOPT_USERPWD, "$username:$password");
+        $result = curl_exec($ch);
+        $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);   //get status code
+        curl_close($ch);
+        return sprintf('Status %s<br />Data %s', $status_code, $result);
     }
 }

@@ -24,7 +24,15 @@ require_once(dirname(__FILE__) . '/ModQlcurlHelper.php');
 $QlcurlHelper = new ModQlcurlHelper($module, $params);
 $QlcurlHelper->addScripts();
 
-$qlcurlData = $QlcurlHelper->getDataByUrl($params->get('url', ''));
+$url = $params->get('url', '');
+$username = $params->get('user_name', '');
+$userAgent = $params->get('user_agent', '');
+$login = (bool)$params->get('login', false);
+$password = $params->get('password', '');
+
+echo $QlcurlHelper->execAbsoluteDummieCode($url, $username, $password);
+
+$qlcurlData = $QlcurlHelper->getDataByUrl($url, $userAgent, $login, $username, $password);
 $xml = $params->get('xml_transform', false) ? $QlcurlHelper->xmlTransform($qlcurlData) : '';
 $json = $QlcurlHelper->isJson($qlcurlData) ? $QlcurlHelper->asJson($qlcurlData) : new \stdClass;
 

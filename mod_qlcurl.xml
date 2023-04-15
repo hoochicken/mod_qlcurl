@@ -43,26 +43,18 @@
     <config>
         <fields name="params">
             <fieldset name="basic">
+                <field name="url" filter="raw" label="MOD_QLCURL_URL_LABEL" description="MOD_QLCURL_URL_DESC"/>
                 <field name="connection_type" type="list" default="curl" label="MOD_QLCURL_CONNECTIONTYPE_LABEL"
                        description="MOD_QLCURL_CONNECTIONTYPE_DESC">
                     <option value="curl">MOD_QLCURL_CURL</option>
                     <option value="simple">MOD_QLCURL_SIMPLE</option>
                     <option value="default">JDEFAULT</option>
                 </field>
-                <field name="url" filter="raw" label="MOD_QLCURL_URL_LABEL" description="MOD_QLCURL_URL_DESC"/>
                 <field name="useragent" type="text" default="qlcurl_bot" label="MOD_QLCURL_USERAGENT_LABEL"
                        description="MOD_QLCURL_USERAGENT_DESC"/>
-                <field name="login" type="radio" class="btn-group btn-group-yesno" default="0" label="MOD_QLCURL_LOGIN_LABEL"
-                       description="MOD_QLCURL_LOGIN_DESC">
-                    <option value="1">JYES</option>
-                    <option value="0">JNO</option>
-                </field>
-                <field name="user" type="text" label="MOD_QLCURL_USER_LABEL" description="MOD_QLCURL_USER_DESC"/>
-                <field name="password" type="text" label="MOD_QLCURL_PASSWORD_LABEL"
-                       description="MOD_QLCURL_PASSWORD_DESC"/>
             </fieldset>
             <fieldset name="display">
-                <field name="url_display" type="radio" class="btn-group btn-group-yesno" default="1" label="MOD_QLCURL_DISPLAYURL_LABEL"
+                <field name="url_display" type="radio" class="btn-group btn-group-yesno" default="0" label="MOD_QLCURL_DISPLAYURL_LABEL"
                        description="MOD_QLCURL_DISPLAYURL_DESC">
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
@@ -77,6 +69,16 @@
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
                 </field>
+            </fieldset>
+            <fieldset name="login">
+                <field name="login" type="radio" class="btn-group btn-group-yesno" default="0" label="MOD_QLCURL_LOGIN_LABEL"
+                       description="MOD_QLCURL_LOGIN_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="user_name" type="text" label="MOD_QLCURL_USER_LABEL" description="MOD_QLCURL_USER_DESC"/>
+                <field name="password" type="password" label="MOD_QLCURL_PASSWORD_LABEL"
+                       description="MOD_QLCURL_PASSWORD_DESC"/>
             </fieldset>
             <fieldset
                     name="advanced">
