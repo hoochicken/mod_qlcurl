@@ -31,9 +31,10 @@
         <folder>php</folder>
         <folder>tmpl</folder>
         <filename>index.html</filename>
-        <filename>helper.php</filename>
+        <filename>ModQlcurlHelper.php</filename>
         <filename>mod_qlcurl.xml</filename>
         <filename>licence.txt</filename>
+        <filename>README.md</filename>
     </files>
     <languages>
         <language tag="en-GB">language/en-GB/en-GB.mod_qlcurl.ini</language>
